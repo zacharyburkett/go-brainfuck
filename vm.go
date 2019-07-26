@@ -51,8 +51,9 @@ func (vm *VM) Exec() error {
 		if vm.instr >= len(vm.prog) {
 			break
 		}
-		op := ops[vm.prog[vm.instr]]
-		op(vm)
+		if op, ok := ops[vm.prog[vm.instr]]; ok {
+			op(vm)
+		}
 		vm.instr++
 	}
 	return nil
